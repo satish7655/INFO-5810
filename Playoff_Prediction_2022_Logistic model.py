@@ -27,10 +27,10 @@ pd.set_option('display.max_colwidth', None)
 print(combined_df.head(20))
 
 # select the conference to predict the playoff team in the up coming season
-df_east = combined_df.loc[combined_df["Conf"] == "East"]
+selected_conference = combined_df.loc[combined_df["Conf"] == "East"]
 
-train_1 = df_east.loc[df_east["Year"] < 2022]
-test_1 = df_east.loc[df_east["Year"] >= 2022]
+train_1 = selected_conference.loc[selected_conference["Year"] < 2022]
+test_1 = selected_conference.loc[selected_conference["Year"] >= 2022]
 
 # define the predictor variables and the response variable
 X_train_1 = train_1.drop(columns=Remove)
@@ -59,8 +59,8 @@ print(f"Testing Data Score: {Testing_Score}")
 print("\n")
 Conf_scores = [["Train Score", Training_Score],
                ["Test Score", Testing_Score]]
-df_east_scores = pd.DataFrame(Conf_scores, columns=['Type', 'Logistic'])
-print(df_east_scores)
+selected_conference_scores = pd.DataFrame(Conf_scores, columns=['Type', 'Logistic'])
+print(selected_conference_scores)
 
 print("\n**********Predicted team that will make Playoff along w/ their details**************")
 Playoff_Prediction_2022 = test_1[["Team", "Year", "playoffs_y_n", "W%"]]
